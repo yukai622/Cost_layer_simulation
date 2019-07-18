@@ -1,6 +1,6 @@
-#include "pv_panel.h"
+#include "p_pv.h"
 
-void pv_panel::set_attributes()
+void p_pv::set_attributes()
 {
 	P.set_timestep(SIM_STEP, sc_core::SC_SEC);
 	sun_irradiance.set_timestep(SIM_STEP, sc_core::SC_SEC);
@@ -8,13 +8,13 @@ void pv_panel::set_attributes()
 }
 
 
-void pv_panel::set_data(int &pv_num){
+void p_pv::set_data(int &pv_num){
 
 pv_number = pv_num;
 
 }
 
-void pv_panel::initialize()
+void p_pv::initialize()
 {
 	//unsigned int i;
 	//ifstream top, back; 
@@ -44,7 +44,7 @@ void pv_panel::initialize()
 }
 
 
-void pv_panel::processing()
+void p_pv::processing()
 {  
 
 //pv_num = pnum.read();
@@ -82,9 +82,9 @@ void pv_panel::processing()
 
 
 
-	if (t == LENGTH - 1) {
-		cout<<"Report: PV panel works correctly until to the end!"<<endl;
-		cout<<"PV array has " <<pv_number <<" panels! "<<" @"<<sc_time_stamp()<<endl;
+	if (t == LENGTH-1) {
+//		cout<<"Report: PV panel works correctly until to the end!"<<endl;
+		cout<<"PV array has " <<pv_number <<" panels! "<<"@"<<sc_time_stamp()<<endl;
 		top.close();
 
 	}

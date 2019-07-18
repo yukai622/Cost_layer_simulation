@@ -2,7 +2,7 @@
 #include "tstep.h"
 
 
-SCA_TDF_MODULE (pv_panel)
+SCA_TDF_MODULE (p_pv)
 { 
 
   sca_tdf::sca_out<double> P; 
@@ -16,7 +16,7 @@ SCA_TDF_MODULE (pv_panel)
 
   ifstream top; // To store the irradiance profile
 
-  SCA_CTOR(pv_panel): P("P"), sun_irradiance("sun_irradiance"), t(0), counter(0) {}
+  SCA_CTOR(p_pv): P("P"), sun_irradiance("sun_irradiance"), t(0), counter(0) {}
 
 
   int pv_number;

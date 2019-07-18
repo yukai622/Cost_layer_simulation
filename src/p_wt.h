@@ -3,7 +3,7 @@
 #include "math.h"
 
 
-SCA_TDF_MODULE (windturbine)
+SCA_TDF_MODULE (p_wt)
 {  
   
   sca_tdf::sca_out<double> power,windspeed; 
@@ -13,7 +13,7 @@ SCA_TDF_MODULE (windturbine)
 
   unsigned int t;
 
-  SCA_CTOR(windturbine): power("power"), windspeed("windspeed"),t(0), counter(0), wind(0.0) {}
+  SCA_CTOR(p_wt): power("power"), windspeed("windspeed"),t(0), counter(0), wind(0.0) {}
 
   void set_attributes();
 

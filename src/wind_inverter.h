@@ -3,17 +3,15 @@
 
 SCA_TDF_MODULE(inverter_wt)
 {
-  sca_tdf::sca_out<double> I; // current connect to bus
- //sca_tdf::sca_in<double> Pwind, V; //power generated from wind, Bus voltage 
-  sca_tdf::sca_in<double> Pwind; //Power generated from wind
+	sca_tdf::sca_out<double> I; // Current connect to the cti bus = Power/Vbus
+	sca_tdf::sca_in<double> Pwind; //Power generated from wind
 
-  
-  //SCA_CTOR(inverter_wt): I("I"), V("V"), Pwind("Pwind") {}
-  SCA_CTOR(inverter_wt): I("I"), Pwind("Pwind") {}
 
-  void set_attributes();
+	SCA_CTOR(inverter_wt): I("I"), Pwind("Pwind") {}
 
-  void initialize();
+	void set_attributes();
 
-  void processing();
+	void initialize();
+
+	void processing();
 };

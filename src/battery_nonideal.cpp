@@ -1,18 +1,18 @@
-#include "battery_fre.h"
+#include "battery_nonideal.h"
 
-void battery_fre::set_attributes(){
+void battery_nonideal::set_attributes(){
 	out.set_timestep(SIM_STEP,sc_core::SC_SEC);
 	out2.set_timestep(SIM_STEP,sc_core::SC_SEC);
 	out.set_delay(1);
 	out2.set_delay(1);
 }
 
-void battery_fre::initialize(){
+void battery_nonideal::initialize(){
 
 }
 
 
-void battery_fre::processing(){
+void battery_nonideal::processing(){
 
 	double tmpcurrent = in.read();
 	double tempsoc = in2.read();
@@ -31,7 +31,7 @@ void battery_fre::processing(){
 	//out.write(delta_crate);
 	out.write(0.0);
 	out2.write(0.0);
-	//out2.write(delta_freq);
+	//out2.write(delta_nonidealq);
 	
 
 }

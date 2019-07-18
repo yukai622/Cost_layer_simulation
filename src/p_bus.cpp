@@ -1,17 +1,17 @@
-#include "cti_bus.h"
+#include "p_bus.h"
 
-void cti_bus::set_attributes(){
+void p_bus::set_attributes(){
 	Ibatt_cnv.set_delay(1);
 	//	Vbatt_cnv.set_delay(1);
 	//	Vpv_cnv.set_delay(1);
 	//	Vwind_inv.set_delay(1);
 }
 
-void cti_bus::initialize(){
+void p_bus::initialize(){
 
 }
 
-void cti_bus::processing(){
+void p_bus::processing(){
 
 	double batt_soc = SOC.read();
 

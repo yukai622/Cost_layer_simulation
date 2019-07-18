@@ -1,12 +1,12 @@
-#include "wind_turbine.h"
+#include "p_wt.h"
 
-void windturbine::set_attributes()
+void p_wt::set_attributes()
 {
 	power.set_timestep(SIM_STEP, sc_core::SC_SEC);
 	//P.set_delay(1);
 }
 
-void windturbine::initialize()
+void p_wt::initialize()
 {
 	//unsigned int i;
 	//ifstream in_wind_speed; 
@@ -29,7 +29,7 @@ void windturbine::initialize()
 }
 
 
-void windturbine::processing()
+void p_wt::processing()
 {  
 
 	double wind_high;

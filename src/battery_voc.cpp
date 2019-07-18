@@ -7,6 +7,7 @@ void battery_voc::set_attributes(){
 	out4.set_timestep(SIM_STEP,sc_core::SC_SEC);
 }
 
+// Pass the data from main.cpp, the data set on the command line
 void battery_voc::set_data(int &batt_s, int &batt_p){
 	batt_snum = batt_s;
 	batt_pnum = batt_p;
@@ -30,6 +31,7 @@ void battery_voc::processing(){
 
 	tmpsoc = tmpsoc - deltacurrent - deltafrequency;
 
+	/*
 	if(tmpsoc > 0.9){
 		tmpsoc = 0.9;
 	}
@@ -37,17 +39,18 @@ void battery_voc::processing(){
 		tmpsoc = 0.1;
 	}
 
-	//	Battery mangagement unit: if the SOC of battery less than 10%, the battery stop to work
-	//	if(tmpsoc<=0.1){
-	//		cout<<"SOC is less than or equal to 10%: "<<tmpsoc<<" @"<<sc_time_stamp()<<endl;
-	//		sc_stop();
-	//	}
+		Battery mangagement unit: if the SOC of battery less than 10%, the battery stop to work
+		if(tmpsoc<=0.1){
+			cout<<"SOC is less than or equal to 10%: "<<tmpsoc<<" @"<<sc_time_stamp()<<endl;
+			sc_stop();
+		}
 
+	*/
 
 	//12V 150Ah battery
 	out.write((24.56*pow(tmpsoc,5)-71.5*pow(tmpsoc,4)+78.45*pow(tmpsoc,3)-40.51*pow(tmpsoc,2)+10.23*tmpsoc+4.1)*batt_pnum);
-	//out2.write(0.0042*exp(-0.07909*tmpsoc)-0.0035);
-	out2.write(0.0005);
+	out2.write(0.0042*exp(-0.07909*tmpsoc)-0.0035);
+	//out2.write(0.0005);
 	out3.write(tmpsoc);
 	out4.write(tmpsoc);
 
