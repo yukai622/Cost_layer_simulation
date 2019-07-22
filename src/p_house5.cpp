@@ -1,11 +1,11 @@
-#include "house5.h"
+#include "p_house5.h"
 
-void house5::set_attributes(){
+void p_house5::set_attributes(){
  out.set_timestep(SIM_STEP, sc_core::SC_SEC);
 
 }
 
-void house5::initialize(){
+void p_house5::initialize(){
 	int j =0;
 	
 	house5powerfile.open("../one_year_inputs/one_year_h5.txt");
@@ -24,7 +24,7 @@ void house5::initialize(){
 // tb7 = 3
 // tb8 = 7
 
-void house5::processing(){
+void p_house5::processing(){
 
 	if(counter%10 == 0 || counter == 0){
 	house5powerfile >> rp;

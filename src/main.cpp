@@ -7,9 +7,9 @@
 #include "battery_converter.h"
 #include "pv_converter.h"
 #include "wind_inverter.h"
-#include "house1.h"
-#include "house2.h"
-#include "house5.h"
+#include "p_house1.h"
+#include "p_house2.h"
+#include "p_house5.h"
 #include "tstep.h"
 
 
@@ -49,9 +49,9 @@ int sc_main(int argc, char* argv[]){
 	converter_pv pv_con("pv_con");
 	inverter_wt wt_inv("wt_inv");
 
-	house1 house1("house1");	
-	house2 house2("house2");	
-	house5 house5("house5");	
+	p_house1 p_house1("p_house1");	
+	p_house2 p_house2("p_house2");	
+	p_house5 p_house5("p_house5");	
 
 	p_bus p_bus("p_bus");
 
@@ -89,9 +89,9 @@ int sc_main(int argc, char* argv[]){
 	wt_inv.I(Iwind_inv);
 
 	//Load side -> A village is filled with 1 2 5 houses' combination.
-	house1.out(Phouse1);
-	house2.out(Phouse2);
-	house5.out(Phouse5);
+	p_house1.out(Phouse1);
+	p_house2.out(Phouse2);
+	p_house5.out(Phouse5);
 
 	//BUS in the power layer
 	p_bus.SOC(SOC);

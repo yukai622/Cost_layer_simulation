@@ -1,7 +1,7 @@
 #include "systemc-ams.h"
 #include "tstep.h"
 
-SCA_TDF_MODULE(house1){
+SCA_TDF_MODULE(p_house1){
 
 	sca_tdf::sca_out<double>out; // Real Power = Apparent power * power factor
 	
@@ -13,7 +13,7 @@ SCA_TDF_MODULE(house1){
 //	double pf; // power factor
 	
 	//SCA_CTOR(house1):out("out"), rp(0), ap(0), pf(0) {}
-	SCA_CTOR(house1):out("out"), rp(0), counter(0) {}
+	SCA_CTOR(p_house1):out("out"), rp(0), counter(0) {}
 
 	void set_attributes();
 	

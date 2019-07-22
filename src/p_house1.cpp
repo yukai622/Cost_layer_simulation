@@ -1,10 +1,10 @@
-#include "house1.h"
+#include "p_house1.h"
 
-void house1::set_attributes(){
+void p_house1::set_attributes(){
 	out.set_timestep(SIM_STEP, sc_core::SC_SEC);
 }
 
-void house1::initialize(){
+void p_house1::initialize(){
 	int j =0;
 
 	house1powerfile.open("../one_year_inputs/one_year_h1.txt");
@@ -28,7 +28,7 @@ void house1::initialize(){
 //tb7 10
 //tb8 2
 
-void house1::processing(){
+void p_house1::processing(){
 
 	if(counter%10 == 0 || counter == 0){
 		house1powerfile >> rp;

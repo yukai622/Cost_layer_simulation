@@ -1,11 +1,11 @@
-#include "house2.h"
+#include "p_house2.h"
 
-void house2::set_attributes(){
+void p_house2::set_attributes(){
  out.set_timestep(SIM_STEP, sc_core::SC_SEC);
 
 }
 
-void house2::initialize(){
+void p_house2::initialize(){
 	int j =0;
 	
 	house2powerfile.open("../one_year_inputs/one_year_h2.txt");
@@ -29,7 +29,7 @@ void house2::initialize(){
 // tb7 4
 // tb8 8
 
-void house2::processing(){
+void p_house2::processing(){
 
 	if(counter%10 == 0 || counter == 0){
 	house2powerfile >> rp;
