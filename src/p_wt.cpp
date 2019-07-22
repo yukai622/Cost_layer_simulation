@@ -32,14 +32,14 @@ void p_wt::initialize()
 void p_wt::processing()
 {  
 
-	double wind_high;
+	//double wind_high;
 
 	if(counter%600 == 0){ // Determined by the time step of trace	
 		in_wind_speed >> wind;
 		//wind_high = wind*(log(50/0.3)/log(3/0.3)); // Notice the height of wind spedd
 	}
 
-	double wtp; 
+	//double wtp; 
 
 	//cout<<wind<<"@"<<sc_time_stamp()<<endl; 
 

@@ -55,7 +55,7 @@ void p_pv::processing()
 	}
 
 	//cout<<Gtop<<"@"<<sc_time_stamp()<<endl;
-	double Ptop, Pback; 
+	//double Ptop, Pback; 
 
 	// Original equations
 	//  Ptop = 4.752e-09*pow(Gtop,3) - 7.352e-06*pow(Gtop,2) + 0.02238*Gtop - 0.6954; 
