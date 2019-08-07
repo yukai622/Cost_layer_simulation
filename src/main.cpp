@@ -2,6 +2,7 @@
 #include "stdlib.h"
 #include "p_battery.h"
 #include "p_bus.h"
+#include "c_bus.h"
 #include "p_pv.h"
 #include "p_wt.h"
 #include "battery_converter.h"
@@ -45,6 +46,7 @@ int sc_main(int argc, char* argv[]){
 
 	// Signals for electricity from grid
 	sca_tdf::sca_signal<double> c_price;
+	sca_tdf::sca_signal<double> total_profit;
 	sca_tdf::sca_signal<double> c_h1, c_h2, c_h5;
 
 	// Inst in power layer
@@ -64,6 +66,8 @@ int sc_main(int argc, char* argv[]){
 
 	// Inst in cost layer
 	c_grid c_grid("c_grid");
+
+	c_bus c_bus("c_bus");
 
 	c_house1 c_house1("c_house1");
 	c_house2 c_house2("c_house2");
@@ -140,6 +144,12 @@ int sc_main(int argc, char* argv[]){
 	c_house5.buy(buy);
 	c_house5.out(c_h5);
 
+	c_bus.c_h1(c_h1);
+	c_bus.c_h2(c_h2);
+	c_bus.c_h5(c_h5);
+	c_bus.sell(sell);
+	c_bus.out(total_profit);
+
 	//sca_util::sca_decimation(1000);
 	//To store the values during simualtion
 	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "trace.txt" );
@@ -148,7 +158,9 @@ int sc_main(int argc, char* argv[]){
 
 	//Selecting signals to track
 
-	sca_util::sca_trace(atf,c_price,"Price");
+	sca_util::sca_trace(atf,total_profit,"Total");
+	sca_util::sca_trace(atf,sell,"SELL");
+//	sca_util::sca_trace(atf,c_price,"Price");
 	sca_util::sca_trace(atf,c_h1,"Cost");
 	sca_util::sca_trace(atf,c_h2,"Cost");
 	sca_util::sca_trace(atf,c_h5,"Cost");
@@ -158,9 +170,9 @@ int sc_main(int argc, char* argv[]){
 	//sca_util::sca_trace(atf,Ibatt,"Ibatt");
 	//sca_util::sca_trace(atf,SOC,"SOC");
 	//sca_util::sca_trace(atf,Vbatt,"Vbatt");
-	sca_util::sca_trace(atf,Phouse1,"Phouse1");
-	sca_util::sca_trace(atf,Phouse2,"Phouse2");
-	sca_util::sca_trace(atf,Phouse5,"Phouse5");
+//	sca_util::sca_trace(atf,Phouse1,"Phouse1");
+//	sca_util::sca_trace(atf,Phouse2,"Phouse2");
+//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
 	
 	//sca_util::sca_trace(atf,wind_speed,"Wind");
 	//sca_util::sca_trace(atf,Iwind_inv,"Wind_current");
