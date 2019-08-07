@@ -8,8 +8,11 @@
 #include "pv_converter.h"
 #include "wind_inverter.h"
 #include "p_house1.h"
+#include "c_house1.h"
 #include "p_house2.h"
+#include "c_house2.h"
 #include "p_house5.h"
+#include "c_house5.h"
 #include "c_grid.h"
 #include "tstep.h"
 
@@ -42,6 +45,7 @@ int sc_main(int argc, char* argv[]){
 
 	// Signals for electricity from grid
 	sca_tdf::sca_signal<double> c_price;
+	sca_tdf::sca_signal<double> c_h1, c_h2, c_h5;
 
 	// Inst in power layer
 	p_battery p_batt("p_batt");
@@ -60,6 +64,10 @@ int sc_main(int argc, char* argv[]){
 
 	// Inst in cost layer
 	c_grid c_grid("c_grid");
+
+	c_house1 c_house1("c_house1");
+	c_house2 c_house2("c_house2");
+	c_house5 c_house5("c_house5");
 
 	// Pass the data from command line
 	p_batt.voc->set_data(batt_s,batt_p);
@@ -115,25 +123,41 @@ int sc_main(int argc, char* argv[]){
 	// Gird in the cost layer
 	c_grid.out(c_price);	
 
+	c_house1.power(Phouse1);
+	c_house1.price(c_price);
+	c_house1.out(c_h1);
+
+
+	c_house2.power(Phouse2);
+	c_house2.price(c_price);
+	c_house2.out(c_h2);
+
+
+	c_house5.power(Phouse5);
+	c_house5.price(c_price);
+	c_house5.out(c_h5);
 
 	//sca_util::sca_decimation(1000);
 	//To store the values during simualtion
-	//sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "trace.txt" );
+//	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "trace.txt" );
 
 	//atf->set_mode(sca_decimation(10));
 
 	//Selecting signals to track
 
-	//sca_util::sca_trace(atf,c_price,"Price");
+//	sca_util::sca_trace(atf,c_price,"Price");
+//	sca_util::sca_trace(atf,c_h1,"Cost");
+//	sca_util::sca_trace(atf,c_h2,"Cost");
+//	sca_util::sca_trace(atf,c_h5,"Cost");
 	//sca_util::sca_trace(atf,buy,"BUY");
 	//sca_util::sca_trace(atf,sell,"SELL");
 
 	//sca_util::sca_trace(atf,Ibatt,"Ibatt");
 	//sca_util::sca_trace(atf,SOC,"SOC");
 	//sca_util::sca_trace(atf,Vbatt,"Vbatt");
-	//sca_util::sca_trace(atf,Phouse1,"Phouse1");
-	//sca_util::sca_trace(atf,Phouse2,"Phouse2");
-	//sca_util::sca_trace(atf,Phouse5,"Phouse5");
+//	sca_util::sca_trace(atf,Phouse1,"Phouse1");
+//	sca_util::sca_trace(atf,Phouse2,"Phouse2");
+//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
 	
 	//sca_util::sca_trace(atf,wind_speed,"Wind");
 	//sca_util::sca_trace(atf,Iwind_inv,"Wind_current");
@@ -143,10 +167,7 @@ int sc_main(int argc, char* argv[]){
 	//sca_util::sca_trace(atf,sun_irradiance,"Sun_profile");
 	//sca_util::sca_trace(atf,Power_pv,"Power_pv");
 
-	//sc_start();
 
-
-	//sc_core::sc_set_time_resolution(1.0,sc_core::SC_SEC);	
 	//sc_start(LENGTH, sc_core::SC_SEC);
 
 	sc_start(LENGTH, sc_core::SC_SEC);
