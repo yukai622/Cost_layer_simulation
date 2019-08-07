@@ -15,21 +15,17 @@ void p_bus::processing(){
 
 	double batt_soc = SOC.read();
 
-	// The constant dc bus voltage connection 
-	//Vbatt_cnv.write(VBUS); //dcdc converter for battery
-	//Vpv_cnv.write(vref_cti);   //dcdc converter for pv panel
-	//Vwind_inv.write(vref_cti); //dcac converter for wind turbine
 
 	// Compute the total power comsumption from load side
 	total_load = (Phouse1.read() + Phouse2.read() + Phouse5.read());
-	//	cout<< Phouse1.read()<<"@"<<sc_time_stamp()<<endl;
 
-	//	cout << "Total load " << total_load << endl;
+	//cout << "Total load " << total_load << endl;
+	
 	// Compute the total generation from PV and Wind turbine
 	total_generation = (Ipv_cnv.read() + Iwind_inv.read()) * VBUS;
 
 
-	//	cout << "Total generation " << total_generation << endl;
+	//cout << "Total generation " << total_generation << endl;
 
 	// Determine charge or discharge battery, postive value means discharge
 	Ibatt_tmp = (total_load - total_generation)/VBUS;

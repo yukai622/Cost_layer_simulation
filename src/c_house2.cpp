@@ -14,8 +14,13 @@ void c_house2::processing(){
 
 	
 	current_price = price.read();
+	current_power = power.read();
 
-	out.write(current_price*current_price/3600000);
+	if(buy.read()>0){
+	out.write(-current_power*current_price/3600000);
+	}else{
+	out.write(current_power*current_price/3600000);
+	}
 
 
 }
