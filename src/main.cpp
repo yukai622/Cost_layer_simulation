@@ -10,6 +10,7 @@
 #include "p_house1.h"
 #include "p_house2.h"
 #include "p_house5.h"
+#include "c_grid.h"
 #include "tstep.h"
 
 
@@ -39,6 +40,8 @@ int sc_main(int argc, char* argv[]){
 	sca_tdf::sca_signal<double> buy, sell;	
 
 
+	// Signals for electricity from grid
+	sca_tdf::sca_signal<double> c_price;
 
 	// Inst in power layer
 	p_battery p_batt("p_batt");
@@ -54,6 +57,9 @@ int sc_main(int argc, char* argv[]){
 	p_house5 p_house5("p_house5");	
 
 	p_bus p_bus("p_bus");
+
+	// Inst in cost layer
+	c_grid c_grid("c_grid");
 
 	// Pass the data from command line
 	p_batt.voc->set_data(batt_s,batt_p);
@@ -104,7 +110,10 @@ int sc_main(int argc, char* argv[]){
 	p_bus.Phouse5(Phouse5);		
 
 	p_bus.Buy_from_grid(buy);		
-	p_bus.Sell_to_grid(sell);		
+	p_bus.Sell_to_grid(sell);	
+
+	// Gird in the cost layer
+	c_grid.out(c_price);	
 
 
 	//sca_util::sca_decimation(1000);
@@ -115,6 +124,7 @@ int sc_main(int argc, char* argv[]){
 
 	//Selecting signals to track
 
+	//sca_util::sca_trace(atf,c_price,"Price");
 	//sca_util::sca_trace(atf,buy,"BUY");
 	//sca_util::sca_trace(atf,sell,"SELL");
 
