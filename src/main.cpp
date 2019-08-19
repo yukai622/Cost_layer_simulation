@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "p_battery.h"
+#include "c_battery.h"
 #include "p_bus.h"
 #include "c_bus.h"
 #include "p_pv.h"
@@ -45,7 +46,7 @@ int sc_main(int argc, char* argv[]){
 
 
 	// Signals for electricity from grid
-	sca_tdf::sca_signal<double> c_price;
+	sca_tdf::sca_signal<double> c_price, cost_battery;
 	sca_tdf::sca_signal<double> total_profit;
 	sca_tdf::sca_signal<double> c_h1, c_h2, c_h5;
 
@@ -67,15 +68,19 @@ int sc_main(int argc, char* argv[]){
 	// Inst in cost layer
 	c_grid c_grid("c_grid");
 
+	c_battery c_battery("c_battery");
+
 	c_bus c_bus("c_bus");
 
 	c_house1 c_house1("c_house1");
 	c_house2 c_house2("c_house2");
 	c_house5 c_house5("c_house5");
 
+
 	// Pass the data from command line
 	p_batt.voc->set_data(batt_s,batt_p);
 	p_pv.set_data(pv_num);
+	c_battery.set_data(batt_s,batt_p);
 
 
 	//----------------------Binding in powerlayer-----------------------
@@ -126,6 +131,7 @@ int sc_main(int argc, char* argv[]){
 
 	// Gird in the cost layer
 	c_grid.out(c_price);	
+	c_battery.out(cost_battery);
 
 	c_house1.power(Phouse1);
 	c_house1.price(c_price);
@@ -150,6 +156,8 @@ int sc_main(int argc, char* argv[]){
 	c_bus.sell(sell);
 	c_bus.out(total_profit);
 
+
+
 	//sca_util::sca_decimation(1000);
 	//To store the values during simualtion
 	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "trace.txt" );
@@ -158,16 +166,17 @@ int sc_main(int argc, char* argv[]){
 
 	//Selecting signals to track
 
-	sca_util::sca_trace(atf,total_profit,"Total");
-	sca_util::sca_trace(atf,sell,"SELL");
+//	sca_util::sca_trace(atf,total_profit,"Total");
+//	sca_util::sca_trace(atf,sell,"SELL");
 //	sca_util::sca_trace(atf,c_price,"Price");
-	sca_util::sca_trace(atf,c_h1,"Cost");
-	sca_util::sca_trace(atf,c_h2,"Cost");
-	sca_util::sca_trace(atf,c_h5,"Cost");
+//	sca_util::sca_trace(atf,c_h1,"Cost");
+//	sca_util::sca_trace(atf,c_h2,"Cost");
+//	sca_util::sca_trace(atf,c_h5,"Cost");
 	//sca_util::sca_trace(atf,buy,"BUY");
 	//sca_util::sca_trace(atf,sell,"SELL");
 
 	//sca_util::sca_trace(atf,Ibatt,"Ibatt");
+	sca_util::sca_trace(atf,cost_battery,"cost_battery");
 	//sca_util::sca_trace(atf,SOC,"SOC");
 	//sca_util::sca_trace(atf,Vbatt,"Vbatt");
 //	sca_util::sca_trace(atf,Phouse1,"Phouse1");

@@ -10,4 +10,9 @@
 
 #define WT_NUM 1  
 
+#define BATTLIFETIME 365*5
+#define PVLIFETIME 365*20
+#define WTLIFETIME 365*20
+
+
 #endif
