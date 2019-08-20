@@ -5,7 +5,9 @@
 #include "p_bus.h"
 #include "c_bus.h"
 #include "p_pv.h"
+#include "c_pv.h"
 #include "p_wt.h"
+#include "c_wt.h"
 #include "battery_converter.h"
 #include "pv_converter.h"
 #include "wind_inverter.h"
@@ -46,7 +48,7 @@ int sc_main(int argc, char* argv[]){
 
 
 	// Signals for electricity from grid
-	sca_tdf::sca_signal<double> c_price, cost_battery;
+	sca_tdf::sca_signal<double> c_price, cost_battery, cost_pv, cost_wt;
 	sca_tdf::sca_signal<double> total_profit;
 	sca_tdf::sca_signal<double> c_h1, c_h2, c_h5;
 
@@ -69,6 +71,8 @@ int sc_main(int argc, char* argv[]){
 	c_grid c_grid("c_grid");
 
 	c_battery c_battery("c_battery");
+	c_pv c_pv("c_pv");
+	c_wt c_wt("c_wt");
 
 	c_bus c_bus("c_bus");
 
@@ -81,6 +85,7 @@ int sc_main(int argc, char* argv[]){
 	p_batt.voc->set_data(batt_s,batt_p);
 	p_pv.set_data(pv_num);
 	c_battery.set_data(batt_s,batt_p);
+	c_pv.set_data(pv_num);
 
 
 	//----------------------Binding in powerlayer-----------------------
@@ -132,6 +137,8 @@ int sc_main(int argc, char* argv[]){
 	// Gird in the cost layer
 	c_grid.out(c_price);	
 	c_battery.out(cost_battery);
+	c_pv.out(cost_pv);
+	c_wt.out(cost_wt);
 
 	c_house1.power(Phouse1);
 	c_house1.price(c_price);
@@ -184,7 +191,9 @@ int sc_main(int argc, char* argv[]){
 //	sca_util::sca_trace(atf,Phouse5,"Phouse5");
 	
 	//sca_util::sca_trace(atf,wind_speed,"Wind");
+	sca_util::sca_trace(atf,cost_pv,"cost_pv");
 	//sca_util::sca_trace(atf,Iwind_inv,"Wind_current");
+	sca_util::sca_trace(atf,cost_wt,"cost_wt");
 	//sca_util::sca_trace(atf,Ipv_cnv,"Pv_current");
 	//sca_util::sca_trace(atf,Power_wind,"Power_wind");
 

@@ -13,16 +13,23 @@ void c_battery::set_data(int &batt_s, int &batt_p){
 void c_battery::initialize(){
 	battery_mo = 15; // The unit is /kw/year
 	battery_cap = 2.5*batt_snum*batt_pnum; // The battery pack capital cost
+	lifetime = BATTLIFETIME;
 }
 
 
 void c_battery::processing(){
 
-	current_time = int(sc_time_stamp().to_seconds());
-	cout<< "SImulation time now is:"<<current_time<<endl;
+	current_time = double(sc_time_stamp().to_seconds());
+	//cout<< "SImulation time now is:"<<current_time<<endl;
 
-	out.write(battery_mo*(current_time/31536000) + battery_cap*(current_time/BATTLIFETIME));
-
+	out.write(battery_mo*(current_time/31536000) + battery_cap*(current_time/lifetime));
+	/*
+	cout<<battery_mo*(current_time/31536000)<<endl;
+	cout<<(current_time/31536000)<<endl;
+	cout<<battery_cap*(current_time/lifetime)<<endl;
+	cout<<current_time/lifetime<<endl;
+	cout<<(lifetime)<<endl;
+	*/
 
 }
 

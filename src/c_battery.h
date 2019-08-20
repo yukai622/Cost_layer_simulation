@@ -18,7 +18,7 @@ SCA_TDF_MODULE(c_battery){
 	void processing();
 	
 	private:
-	double battery_mo, battery_cap;
-	int current_time, batt_snum, batt_pnum;
+	double battery_mo, battery_cap, current_time, lifetime;
+	int  batt_snum, batt_pnum;
 
 };
