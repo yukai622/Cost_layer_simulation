@@ -19,12 +19,15 @@ CFLAGS = -c -g -Wno-deprecated
 
 MODULE = run
 SRCS =  ../src/battery_voc.cpp ../src/battery_converter.cpp ../src/battery_char.cpp ../src/battery_nonideal.cpp ../src/p_battery.cpp \
+	../src/c_battery.cpp ../src/c_pv.cpp ../src/c_wt.cpp \
 	../src/p_pv.cpp ../src/pv_converter.cpp \
 	../src/p_wt.cpp ../src/wind_inverter.cpp \
-	../src/house1.cpp ../src/house2.cpp ../src/house5.cpp\
- 	../src/p_bus.cpp ../src/main.cpp
+	../src/p_house1.cpp ../src/p_house2.cpp ../src/p_house5.cpp \
+	../src/c_house1.cpp ../src/c_house2.cpp ../src/c_house5.cpp \
+ 	../src/p_bus.cpp ../src/c_bus.cpp \
+ 	../src/c_grid.cpp \
+	../src/main.cpp
 
-#../src/main.cpp
 
 OBJS = $(SRCS:../src/%.cpp=%.o)
 

@@ -3,11 +3,11 @@
 
 SCA_TDF_MODULE(c_wt){
 
-	//sca_tdf::sca_in<double> in; // Real Power get from power layer
-	sca_tdf::sca_out<double> out; // Cost of pv: Aging + M&O
+//	sca_tdf::sca_in<double> in; // Rate Power get from power layer
+	sca_tdf::sca_out<double> out1,out2; // Cost of pv: Aging + M&O
 	
 	
-	SCA_CTOR(c_wt):out("out"),  current_time(0) {}
+	SCA_CTOR(c_wt):out1("out1"),out2("out2"),current_time(0) {}
 
 
 	void set_attributes();
@@ -17,6 +17,6 @@ SCA_TDF_MODULE(c_wt){
 	void processing();
 	
 	private:
-	double wt_mo, wt_cap, current_time, lifetime;
+	double mo_price,wt_mo,wt_cap,wt_aging,current_time;
 
 };

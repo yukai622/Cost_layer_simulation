@@ -8,10 +8,6 @@ void p_wt::set_attributes()
 
 void p_wt::initialize()
 {
-	//unsigned int i;
-	//ifstream in_wind_speed; 
-//tb1 old
-//tb2 tb3 tb4 new tb5 new tb6 old tb7 old tb8 new
 	in_wind_speed.open("../one_year_inputs/one_year_wind.txt");
 
 	if (!in_wind_speed) {
@@ -19,12 +15,6 @@ void p_wt::initialize()
 		exit(-1);
 	}
 
-	/*
-	   for (i=0;  i<LENGTH; i++) {
-	   in_wind_speed >> wind[i];
-	   }
-	   in_wind_speed.close();
-	   */
 
 }
 
@@ -52,14 +42,14 @@ void p_wt::processing()
 	windspeed.write(wind);
 
 
-
-	if (t == LENGTH - 1) {
-		cout<<"YUKAI Report: Wind Turbine works very well until to the end!"<<endl;
-		//    cout<<"Simulation ended: "<<" @"<<sc_time_stamp()<<endl;
+	if (counter == LENGTH - 1) {
+		cout<<"===================================================================="<<endl;
+		cout<<"Wind Turbine works well until to the "<<sc_time_stamp()<<endl;
+		cout<<"===================================================================="<<endl;
+		//cout<<"Simulation ended: "<<" @"<<sc_time_stamp()<<endl;
 		in_wind_speed.close();
 	}
 
-	t++;
 	counter++;
 
 }

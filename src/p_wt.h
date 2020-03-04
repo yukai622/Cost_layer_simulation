@@ -11,9 +11,7 @@ SCA_TDF_MODULE (p_wt)
 
   ifstream in_wind_speed;
 
-  unsigned int t;
-
-  SCA_CTOR(p_wt): power("power"), windspeed("windspeed"),t(0), counter(0), wind(0.0), wtp(0.0) {}
+  SCA_CTOR(p_wt): power("power"), windspeed("windspeed"), counter(0), wind(0.0), wtp(0.0) {}
 
   void set_attributes();
 

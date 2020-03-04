@@ -103,11 +103,12 @@ void p_bus::processing(){
 		cout<<"Total buy power at f2 price from main grid is "<<total_buy_f2/3600000<<"kWh."<<endl;
 		cout<<"Total buy power at f3 price from main grid is "<<total_buy_f3/3600000<<"kWh."<<endl;
 		cout<<"Total sell power to main grid is "<<total_sell/3600000<<"kWh."<<endl;
-		cout<<"Total sell power at f1 price from main grid is "<<total_sell_f1/3600000<<"kWh."<<endl;
-		cout<<"Total sell power at f2 price from main grid is "<<total_sell_f2/3600000<<"kWh."<<endl;
-		cout<<"Total sell power at f3 price from main grid is "<<total_sell_f3/3600000<<"kWh."<<endl;
-		cout<<"======================================================================"<<endl;
+	//	cout<<"Total sell power at f1 price from main grid is "<<total_sell_f1/3600000<<"kWh."<<endl;
+	//	cout<<"Total sell power at f2 price from main grid is "<<total_sell_f2/3600000<<"kWh."<<endl;
+	//	cout<<"Total sell power at f3 price from main grid is "<<total_sell_f3/3600000<<"kWh."<<endl;
+		cout<<"===================================================================="<<endl;
 		cout<<"Renwable generated power for own use is "<<own_use<<" $."<<endl;
+		cout<<"===================================================================="<<endl;
 	}
 }
 

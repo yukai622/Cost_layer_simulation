@@ -16,7 +16,7 @@ void c_bus::processing(){
 
 	tmp_sell = sell.read();
 
-	total_ele_cost = total_ele_cost + c_h1.read() + c_h2.read() + c_h5.read() - tmp_sell/3600000*0.1;
+	total_ele_cost = total_ele_cost + c_h1.read() + c_h2.read() + c_h5.read() + tmp_sell/3600000*0.03;//Total sell power read from power layer, convert to KWH, the sell price is 0.1$/kWh.
 
 
 	out.write(total_ele_cost);

@@ -48,7 +48,7 @@ int sc_main(int argc, char* argv[]){
 
 
 	// Signals for electricity from grid
-	sca_tdf::sca_signal<double> c_price, cost_battery, cost_pv, cost_wt;
+	sca_tdf::sca_signal<double> c_price, depr_battery, mo_battery, depr_pv, mo_pv, depr_wt, mo_wt;
 	sca_tdf::sca_signal<double> total_profit;
 	sca_tdf::sca_signal<double> c_h1, c_h2, c_h5;
 
@@ -89,7 +89,7 @@ int sc_main(int argc, char* argv[]){
 
 
 	//----------------------Binding in powerlayer-----------------------
-	
+
 	//Battery
 	p_batt.I(Ibatt);
 	p_batt.V(Vbatt);
@@ -136,9 +136,18 @@ int sc_main(int argc, char* argv[]){
 
 	// Gird in the cost layer
 	c_grid.out(c_price);	
-	c_battery.out(cost_battery);
-	c_pv.out(cost_pv);
-	c_wt.out(cost_wt);
+
+	c_battery.out1(depr_battery);
+	c_battery.out2(mo_battery);
+
+
+	//PV in the cost layer
+	c_pv.out1(depr_pv);
+	c_pv.out2(mo_pv);
+
+
+	c_wt.out2(mo_wt);
+	c_wt.out1(depr_wt);
 
 	c_house1.power(Phouse1);
 	c_house1.price(c_price);
@@ -169,31 +178,36 @@ int sc_main(int argc, char* argv[]){
 	//To store the values during simualtion
 	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "trace.txt" );
 
-	//atf->set_mode(sca_decimation(10));
+	atf->set_mode(sca_decimation(3600));
 
 	//Selecting signals to track
 
-//	sca_util::sca_trace(atf,total_profit,"Total");
-//	sca_util::sca_trace(atf,sell,"SELL");
-//	sca_util::sca_trace(atf,c_price,"Price");
-//	sca_util::sca_trace(atf,c_h1,"Cost");
-//	sca_util::sca_trace(atf,c_h2,"Cost");
-//	sca_util::sca_trace(atf,c_h5,"Cost");
-	//sca_util::sca_trace(atf,buy,"BUY");
-	//sca_util::sca_trace(atf,sell,"SELL");
+	//	sca_util::sca_trace(atf,total_profit,"Total");
+	//	sca_util::sca_trace(atf,sell,"SELL");
+	//	sca_util::sca_trace(atf,c_price,"Price");
+	//	sca_util::sca_trace(atf,c_h1,"Cost");
+	//	sca_util::sca_trace(atf,c_h2,"Cost");
+	//	sca_util::sca_trace(atf,c_h5,"Cost");
+	//	sca_util::sca_trace(atf,cost_pv,"PV_DEPR");
+		
+//		sca_util::sca_trace(atf,buy,"BUY");
+//		sca_util::sca_trace(atf,sell,"SELL");
 
-	//sca_util::sca_trace(atf,Ibatt,"Ibatt");
-	sca_util::sca_trace(atf,cost_battery,"cost_battery");
-	//sca_util::sca_trace(atf,SOC,"SOC");
-	//sca_util::sca_trace(atf,Vbatt,"Vbatt");
-//	sca_util::sca_trace(atf,Phouse1,"Phouse1");
-//	sca_util::sca_trace(atf,Phouse2,"Phouse2");
-//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
-	
+	//	sca_util::sca_trace(atf,Ibatt,"Ibatt");
+	sca_util::sca_trace(atf,depr_battery,"depr_battery");
+	sca_util::sca_trace(atf,mo_battery,"mo_battery");
+	//	sca_util::sca_trace(atf,SOC,"SOC");
+	//	sca_util::sca_trace(atf,Vbatt,"Vbatt");
+	//	sca_util::sca_trace(atf,Phouse1,"Phouse1");
+	//	sca_util::sca_trace(atf,Phouse2,"Phouse2");
+	//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
+
 	//sca_util::sca_trace(atf,wind_speed,"Wind");
-	sca_util::sca_trace(atf,cost_pv,"cost_pv");
+	sca_util::sca_trace(atf,depr_pv,"depr_pv");
+	sca_util::sca_trace(atf,mo_pv,"mo_pv");
 	//sca_util::sca_trace(atf,Iwind_inv,"Wind_current");
-	sca_util::sca_trace(atf,cost_wt,"cost_wt");
+	sca_util::sca_trace(atf,depr_wt,"depr_wt");
+	sca_util::sca_trace(atf,mo_wt,"mo_wt");
 	//sca_util::sca_trace(atf,Ipv_cnv,"Pv_current");
 	//sca_util::sca_trace(atf,Power_wind,"Power_wind");
 
@@ -205,8 +219,9 @@ int sc_main(int argc, char* argv[]){
 
 	sc_start(LENGTH, sc_core::SC_SEC);
 
-        //cout<<"Battery bank configuration is "<<batt_s<<" X "<<batt_p<<" (p x s)."<<endl;
-	cout<<"Report: The WHOLE SIMULATION LENGTH "<<"====== "<<sc_time_stamp()<<endl;
+	//cout<<"Battery bank configuration is "<<batt_s<<" X "<<batt_p<<" (p x s)."<<endl;
+	cout<<"The WHOLE SIMULATION LENGTH "<<"====== "<<sc_time_stamp()<<endl;
+	cout<<"===================================================================="<<endl;
 
 	//sca_util::sca_close_tabular_trace_file( atf );	
 

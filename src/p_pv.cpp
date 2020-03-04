@@ -19,35 +19,18 @@ void p_pv::initialize()
 	//unsigned int i;
 	//ifstream top, back; 
 
-	top.open("../one_year_inputs/one_year_sun_south.txt"); // tb1 old tb2 new tb3 new tb4 new tb5 old tb6 new tb7 tb8 old
+	top.open("../one_year_inputs/one_year_sun_south.txt"); 
 	if (!top) {
 		cout << "Cannot open irradiance file.\n"<< endl;
 		exit(-1);
 	}
 
-	/*
-	   for (i=0;  i<LENGTH; i++) {
-	   top >> Gtop[i];
-	   }
-	   top.close();
-
-	   back.open("sun_one_week_april.txt");
-	   if (!back) {
-	   cout << "Cannot open irradiance file.\n"<< endl;
-	   exit(-1);
-	   }
-	   for (i=0;  i<LENGTH; i++) {
-	   back >> Gwest[i];
-	   }
-	   back.close();
-	   */
 }
 
 
 void p_pv::processing()
 {  
 
-//pv_num = pnum.read();
 
 	if(counter%60 == 0.0){
 		top >> Gtop;
@@ -55,7 +38,6 @@ void p_pv::processing()
 	}
 
 	//cout<<Gtop<<"@"<<sc_time_stamp()<<endl;
-	//double Ptop, Pback; 
 
 	// Original equations
 	//  Ptop = 4.752e-09*pow(Gtop,3) - 7.352e-06*pow(Gtop,2) + 0.02238*Gtop - 0.6954; 
@@ -66,7 +48,6 @@ void p_pv::processing()
 	Ptop = 4.752e-09*pow(Gtop,3) - 7.352e-06*pow(Gtop,2) + 0.02238*Gtop; 
 	Pback = 4.752e-09*pow(Gwest,3) - 7.352e-06*pow(Gwest,2) + 0.02238*Gwest;
 
-	//cout<<Gtop[t]<<endl;
 
 
 
@@ -82,14 +63,17 @@ void p_pv::processing()
 
 
 
-	if (t == LENGTH-1) {
-//		cout<<"Report: PV panel works correctly until to the end!"<<endl;
-		cout<<"PV array has " <<pv_number <<" panels! "<<"@"<<sc_time_stamp()<<endl;
+	if (counter == LENGTH-1) {
+		cout<<"Report: PV panel works correctly until to the "<<sc_time_stamp()<<endl;
+		cout<<"===================================================================="<<endl;
+//		cout<<"PV array has " <<pv_number <<" panels! "<<"@"<<sc_time_stamp()<<endl;
+		cout<<"PV array has " <<pv_number <<" panels! "<<endl;
+//		cout<<"===================================================================="<<endl;
+
 		top.close();
 
 	}
 
-	t++;
 	counter++;
 
 }

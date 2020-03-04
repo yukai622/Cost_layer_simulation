@@ -20,8 +20,6 @@ void battery_voc::initialize(){
 
 void battery_voc::processing(){
 	double tmpcurrent = in.read();
-//	batt_s = in4.read();
-//	batt_p = in5.read();
 
 
 	tmpsoc = tmpsoc-((tmpcurrent*SIM_STEP)/(3600*3.4*batt_snum)); //Modify the capacity, 150Ah is the reference one
@@ -56,6 +54,20 @@ void battery_voc::processing(){
 
 	if (t == LENGTH - 1) {
 	cout<<"Battery bank configuration is "<<batt_snum<<" X "<<batt_pnum<<" (p x s)."<<endl;
+	cout<<"===================================================================="<<endl;
 	}
         t++;
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
