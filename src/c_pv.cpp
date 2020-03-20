@@ -31,13 +31,18 @@ void c_pv::processing(){
 	//M&O cost
 	pv_mo = mo_price*0.001*pv_number*312*(current_time/31536000);
 
-/*
-	if(current_time == (LENGTH-1)){
+
+//	cout<<"PV deperiation cost is "<< pv_depr <<" PV m&o cost is "<<pv_mo<<endl;
+
+
+	int timenow = int(current_time);
+
+	if(timenow == (LENGTH-1)){
 		cout<<"PV array depreciation cost is: "<<pv_depr<<endl;
 		cout<<"PV array M&O cost is: "<<pv_mo<<endl;
 		cout<<"===================================================================="<<endl;	
 	}
-*/
+
 	out1.write(pv_depr);
 	out2.write(pv_mo);
 

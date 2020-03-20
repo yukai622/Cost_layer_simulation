@@ -17,7 +17,8 @@ SCA_TDF_MODULE(c_pv){
 	void processing();
 	
 	private:
-	double mo_price, pv_cap, pv_aging, pv_mo, pv_depr, current_time;
+	double mo_price, pv_cap, pv_aging, pv_mo, pv_depr;
+        double current_time;
 	int  pv_number;
 
 };

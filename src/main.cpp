@@ -51,6 +51,7 @@ int sc_main(int argc, char* argv[]){
 	sca_tdf::sca_signal<double> c_price, depr_battery, mo_battery, depr_pv, mo_pv, depr_wt, mo_wt;
 	sca_tdf::sca_signal<double> total_profit;
 	sca_tdf::sca_signal<double> c_h1, c_h2, c_h5;
+	sca_tdf::sca_signal<double> ownuse_cost,buy_cost,sell_cost;
 
 	// Inst in power layer
 	p_battery p_batt("p_batt");
@@ -133,6 +134,9 @@ int sc_main(int argc, char* argv[]){
 
 	p_bus.Buy_from_grid(buy);		
 	p_bus.Sell_to_grid(sell);	
+	p_bus.total_sell_cost(buy_cost);
+	p_bus.total_buy_cost(sell_cost);
+	p_bus.own_use_cost(ownuse_cost);
 
 	// Gird in the cost layer
 	c_grid.out(c_price);	
@@ -176,7 +180,7 @@ int sc_main(int argc, char* argv[]){
 
 	//sca_util::sca_decimation(1000);
 	//To store the values during simualtion
-	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "trace.txt" );
+	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "one_month_load.txt" );
 
 	atf->set_mode(sca_decimation(10));
 
@@ -189,19 +193,22 @@ int sc_main(int argc, char* argv[]){
 	//	sca_util::sca_trace(atf,c_h5,"Cost");
 	//	sca_util::sca_trace(atf,cost_pv,"PV_DEPR");
 		
-//		sca_util::sca_trace(atf,buy,"BUY");
-//		sca_util::sca_trace(atf,sell,"SELL");
+	//	sca_util::sca_trace(atf,buy,"BUY");
+	//	sca_util::sca_trace(atf,sell,"SELL");
+	//	sca_util::sca_trace(atf,buy_cost,"BUYCOST");
+	//	sca_util::sca_trace(atf,sell_cost,"SELLCOST");
+	//	sca_util::sca_trace(atf,ownuse_cost,"OWNUSECOST");
 
 	//	sca_util::sca_trace(atf,Ibatt,"Ibatt");
-	//	sca_util::sca_trace(atf,depr_battery,"depr_battery");
-	//	sca_util::sca_trace(atf,mo_battery,"mo_battery");
+//		sca_util::sca_trace(atf,depr_battery,"depr_battery");
+//		sca_util::sca_trace(atf,mo_battery,"mo_battery");
 	//	sca_util::sca_trace(atf,SOC,"SOC");
 	//	sca_util::sca_trace(atf,Vbatt,"Vbatt");
-	//	sca_util::sca_trace(atf,Phouse1,"Phouse1");
-	//	sca_util::sca_trace(atf,Phouse2,"Phouse2");
-	//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
+		sca_util::sca_trace(atf,Phouse1,"Phouse1");
+		sca_util::sca_trace(atf,Phouse2,"Phouse2");
+		sca_util::sca_trace(atf,Phouse5,"Phouse5");
 
-		sca_util::sca_trace(atf,wind_speed,"Wind");
+	//	sca_util::sca_trace(atf,wind_speed,"Wind");
 	//	sca_util::sca_trace(atf,depr_pv,"depr_pv");
 	//	sca_util::sca_trace(atf,mo_pv,"mo_pv");
 	//	sca_util::sca_trace(atf,Iwind_inv,"Wind_current");
@@ -210,7 +217,7 @@ int sc_main(int argc, char* argv[]){
 	//	sca_util::sca_trace(atf,Ipv_cnv,"Pv_current");
 	//	sca_util::sca_trace(atf,Power_wind,"Power_wind");
 
-		sca_util::sca_trace(atf,sun_irradiance,"Sun_profile");
+	//	sca_util::sca_trace(atf,sun_irradiance,"Sun_profile");
 	//	sca_util::sca_trace(atf,Power_pv,"Power_pv");
 
 

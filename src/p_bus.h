@@ -27,11 +27,16 @@ SCA_TDF_MODULE(p_bus){
 	sca_tdf::sca_out<double> Buy_from_grid;
 	sca_tdf::sca_out<double> Sell_to_grid;
 
+	//Out to compute the real time profit
+	sca_tdf::sca_out<double> total_sell_cost;
+	sca_tdf::sca_out<double> total_buy_cost;
+	sca_tdf::sca_out<double> own_use_cost;
+
 	// All signals
 	//SCA_CTOR(p_bus): vref_cti(430.0),Ibatt_tmp(0.0),total_power(0.0), SOC("SOC"), Ibatt_cnv("Ibatt_cnv"),Vbatt_cnv("Vbatt_cnv"), Ipv_cnv("Ipv_cnv"), Vpv_cnv("Vpv_cnv"), Iwind_inv("Iwind_inv"), Vwind_inv("Vwind_inv"), Phouse1("Phouse1"), Phouse2("Phouse2"), Phouse5("Phouse5") {}
 	
 	// Omit bus votage, define it as VBUS
-	SCA_CTOR(p_bus): Ibatt_tmp(0.0),total_load(0.0),total_generation(0.0), SOC("SOC"), Ibatt_cnv("Ibatt_cnv"), Ipv_cnv("Ipv_cnv"), Iwind_inv("Iwind_inv"), Buy_from_grid("Buy_from_grid"), Sell_to_grid("Sell_to_grid"), Phouse1("Phouse1"), Phouse2("Phouse2"), Phouse5("Phouse5"), total_buy_f1(0.0), total_buy_f2(0.0),total_buy_f3(0.0), total_sell_f1(0.0),total_sell_f2(0.0), total_sell_f3(0.0), total_buy(0.0),total_sell(0.0), counter(0), own_use(0.0) {}
+		SCA_CTOR(p_bus): Ibatt_tmp(0.0),total_load(0.0),total_generation(0.0), SOC("SOC"), Ibatt_cnv("Ibatt_cnv"), Ipv_cnv("Ipv_cnv"), Iwind_inv("Iwind_inv"), Buy_from_grid("Buy_from_grid"), Sell_to_grid("Sell_to_grid"), Phouse1("Phouse1"), Phouse2("Phouse2"), Phouse5("Phouse5"), total_buy_f1(0.0), total_buy_f2(0.0),total_buy_f3(0.0), total_sell_f1(0.0),total_sell_f2(0.0), total_sell_f3(0.0), total_buy(0.0),total_sell(0.0), counter(0), own_use(0.0),total_buy_f1_cost(0.0), total_buy_f2_cost(0.0),total_buy_f3_cost(0.0),total_sell_f1_cost(0.0),total_sell_f2_cost(0.0),total_sell_f3_cost(0.0) {}
 
 	void set_attributes();
 
@@ -44,5 +49,12 @@ SCA_TDF_MODULE(p_bus){
 	 double counter, own_use;
 	 double Ibatt_tmp, total_load, total_generation;
 	 double total_buy_f1, total_buy_f2, total_buy_f3, total_sell_f1, total_sell_f2, total_sell_f3, total_sell, total_buy;
+	 double total_buy_f1_cost;
+	 double total_buy_f2_cost;
+	 double total_buy_f3_cost;
+	 double total_sell_f1_cost;
+	 double total_sell_f2_cost;
+	 double total_sell_f3_cost;
+
 };
 
