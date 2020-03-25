@@ -12,6 +12,7 @@ SC_MODULE(p_battery){
 	//	sca_tdf::sca_in<int> pnum; // p number
 	sca_tdf::sca_out<double> V; // Vb battery voltage
 	sca_tdf::sca_out<double> SOC; //SOC
+	sca_tdf::sca_out<double> SOH; //SOH
 
 
 	//Connecting signals
@@ -38,6 +39,7 @@ SC_MODULE(p_battery){
 		voc->out2(Rs);
 		voc->out3(SOC);
 		voc->out4(tmpsoc);
+		voc->out5(SOH);
 
 		batt->in(Rs);
 		batt->in2(I);

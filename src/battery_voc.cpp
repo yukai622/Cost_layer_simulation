@@ -5,6 +5,7 @@ void battery_voc::set_attributes(){
 	out2.set_timestep(SIM_STEP,sc_core::SC_SEC);
 	out3.set_timestep(SIM_STEP,sc_core::SC_SEC);
 	out4.set_timestep(SIM_STEP,sc_core::SC_SEC);
+	out5.set_timestep(SIM_STEP,sc_core::SC_SEC); //SOH
 }
 
 // Pass the data from main.cpp, the data set on the command line
@@ -22,7 +23,7 @@ void battery_voc::processing(){
 	double tmpcurrent = in.read();
 
 
-	tmpsoc = tmpsoc-((tmpcurrent*SIM_STEP)/(3600*3.4*batt_snum)); //Modify the capacity, 150Ah is the reference one
+	tmpsoc = tmpsoc-((tmpcurrent*SIM_STEP)/(3600*3.4*batt_snum*(1-3.66e-05*exp(0.19804*tmpcurrent)))); //Modify the capacity, 150Ah is the reference one
 
 	double deltacurrent = in2.read();
 	double deltafrequency = in3.read();
@@ -51,6 +52,7 @@ void battery_voc::processing(){
 	//out2.write(0.0005);
 	out3.write(tmpsoc);
 	out4.write(tmpsoc);
+	out5.write(1 - 3.66e-05*exp(0.19804*tmpcurrent));
 
 	if (t == LENGTH - 1) {
 	cout<<"Battery bank configuration is "<<batt_snum<<" X "<<batt_pnum<<" (p x s)."<<endl;

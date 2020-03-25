@@ -50,6 +50,7 @@ int sc_main(int argc, char* argv[]){
 	// Signals for electricity from grid
 	sca_tdf::sca_signal<double> c_price, depr_battery, mo_battery, depr_pv, mo_pv, depr_wt, mo_wt;
 	sca_tdf::sca_signal<double> total_profit;
+	sca_tdf::sca_signal<double> SOH;
 	sca_tdf::sca_signal<double> c_h1, c_h2, c_h5;
 	sca_tdf::sca_signal<double> ownuse_cost,buy_cost,sell_cost;
 
@@ -95,6 +96,7 @@ int sc_main(int argc, char* argv[]){
 	p_batt.I(Ibatt);
 	p_batt.V(Vbatt);
 	p_batt.SOC(SOC);
+	p_batt.SOH(SOH);
 
 	//Battery converter
 	batt_con.in(Vbatt);
