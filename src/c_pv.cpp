@@ -1,9 +1,10 @@
 #include "c_pv.h"
 
 void c_pv::set_attributes(){
-//	in.set_timestep(SIM_STEP, sc_core::SC_SEC);// Read power from power layer PV unit
-	out1.set_timestep(SIM_STEP, sc_core::SC_SEC);
-	out2.set_timestep(SIM_STEP, sc_core::SC_SEC);
+	in.set_timestep(SIM_STEP, sc_core::SC_SEC);// Read power from power layer PV unit
+	in.set_rate(RATE);
+	out1.set_timestep(RATE, sc_core::SC_SEC);
+	out2.set_timestep(RATE, sc_core::SC_SEC);
 }
 
 void c_pv::set_data(int &pv_num){
@@ -26,10 +27,19 @@ void c_pv::processing(){
 	//pv_aging = pv_cap*(current_time/PVLIFETIME);
 
 	//Depretion cost
-	pv_depr = pv_cap*0.094*(current_time/31536000);
+	pv_depr = pv_cap*0.094*(current_time/31536000); //CRF is 0.094
 
 	//M&O cost
-	pv_mo = mo_price*0.001*pv_number*312*(current_time/31536000);
+	//pv_mo = mo_price*0.001*pv_number*in.read()*(current_time/31536000);
+	//
+	
+	power = 0;
+	for(unsigned long i=0;i<RATE;i++){
+	power = power + in.read(i);
+//	cout<<"The"<< i<<"th read power is " << in.read(i)<<endl;
+	}
+	
+	pv_mo = pv_mo + mo_price*0.001*pv_number*power*0.001/31536000;
 
 
 //	cout<<"PV deperiation cost is "<< pv_depr <<" PV m&o cost is "<<pv_mo<<endl;

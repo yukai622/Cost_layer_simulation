@@ -4,7 +4,9 @@
 
 #define SIM_STEP 1
 
-#define LENGTH 86400*30
+#define LENGTH 86400*1
+
+#define RATE 60
 
 #define VBUS 430
 

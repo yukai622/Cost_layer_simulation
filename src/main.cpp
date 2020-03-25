@@ -146,10 +146,12 @@ int sc_main(int argc, char* argv[]){
 
 
 	//PV in the cost layer
+	c_pv.in(Power_pv);
 	c_pv.out1(depr_pv);
 	c_pv.out2(mo_pv);
 
 
+	c_wt.in(Power_wind);
 	c_wt.out2(mo_wt);
 	c_wt.out1(depr_wt);
 
@@ -180,9 +182,9 @@ int sc_main(int argc, char* argv[]){
 
 	//sca_util::sca_decimation(1000);
 	//To store the values during simualtion
-	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "one_month_load.txt" );
+	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "test.txt" );
 
-	atf->set_mode(sca_decimation(10));
+	atf->set_mode(sca_decimation(1));
 
 	//Selecting signals to track
 
@@ -204,13 +206,13 @@ int sc_main(int argc, char* argv[]){
 //		sca_util::sca_trace(atf,mo_battery,"mo_battery");
 	//	sca_util::sca_trace(atf,SOC,"SOC");
 	//	sca_util::sca_trace(atf,Vbatt,"Vbatt");
-		sca_util::sca_trace(atf,Phouse1,"Phouse1");
-		sca_util::sca_trace(atf,Phouse2,"Phouse2");
-		sca_util::sca_trace(atf,Phouse5,"Phouse5");
+	//	sca_util::sca_trace(atf,Phouse1,"Phouse1");
+	//	sca_util::sca_trace(atf,Phouse2,"Phouse2");
+	//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
 
 	//	sca_util::sca_trace(atf,wind_speed,"Wind");
-	//	sca_util::sca_trace(atf,depr_pv,"depr_pv");
-	//	sca_util::sca_trace(atf,mo_pv,"mo_pv");
+		sca_util::sca_trace(atf,depr_pv,"depr_pv");
+		sca_util::sca_trace(atf,mo_pv,"mo_pv");
 	//	sca_util::sca_trace(atf,Iwind_inv,"Wind_current");
 	//	sca_util::sca_trace(atf,depr_wt,"depr_wt");
 	//	sca_util::sca_trace(atf,mo_wt,"mo_wt");
@@ -218,7 +220,7 @@ int sc_main(int argc, char* argv[]){
 	//	sca_util::sca_trace(atf,Power_wind,"Power_wind");
 
 	//	sca_util::sca_trace(atf,sun_irradiance,"Sun_profile");
-	//	sca_util::sca_trace(atf,Power_pv,"Power_pv");
+		sca_util::sca_trace(atf,Power_pv,"Power_pv");
 
 
 	//sc_start(LENGTH, sc_core::SC_SEC);

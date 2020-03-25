@@ -1,7 +1,7 @@
 #include "c_wt.h"
 
 void c_wt::set_attributes(){
-//		in.set_timestep(SIM_STEP, sc_core::SC_SEC);
+		in.set_timestep(SIM_STEP, sc_core::SC_SEC);
 		out1.set_timestep(SIM_STEP, sc_core::SC_SEC);
 		out2.set_timestep(SIM_STEP, sc_core::SC_SEC);
 }
@@ -20,7 +20,7 @@ void c_wt::processing(){
 //
 
 	//M&O cost
-	wt_mo = mo_price*10*(current_time/31536000);	
+	wt_mo =wt_mo +  mo_price*10/31536000*in.read()*0.001;	
 
 	//Depreciation cost
 	wt_aging = wt_cap*0.094*(current_time/31536000);
