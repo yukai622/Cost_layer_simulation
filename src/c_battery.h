@@ -3,11 +3,11 @@
 
 SCA_TDF_MODULE(c_battery){
 
-	sca_tdf::sca_in<double> in1,in2; // Real Power get from power layer
-	sca_tdf::sca_out<double> out1,out2; // Electricity price stepwise function 
+	sca_tdf::sca_in<double> in1,in2,in3; // Real Power get from power layer
+	sca_tdf::sca_out<double> out1,out2,out3; // Electricity price stepwise function 
 	
 	
-	SCA_CTOR(c_battery):out1("out1"),out2("out2"),current_time(0), power(0.0) {}
+	SCA_CTOR(c_battery):out1("out1"),out2("out2"),out3("out3"),current_time(0), power(0.0),counter(0) {}
 
 	void set_data(int &batt_s, int &batt_p);
 
@@ -19,6 +19,6 @@ SCA_TDF_MODULE(c_battery){
 	
 	private:
 	double battery_mo, battery_cap, current_time, lifetime, power;
-	int  batt_snum, batt_pnum;
+	int  batt_snum, batt_pnum,counter;
 
 };

@@ -50,7 +50,7 @@ int sc_main(int argc, char* argv[]){
 	// Signals for electricity from grid
 	sca_tdf::sca_signal<double> c_price, depr_battery, mo_battery, depr_pv, mo_pv, depr_wt, mo_wt;
 	sca_tdf::sca_signal<double> total_profit;
-	sca_tdf::sca_signal<double> SOH;
+	sca_tdf::sca_signal<double> SOH,replace_battery;
 	sca_tdf::sca_signal<double> c_h1, c_h2, c_h5;
 	sca_tdf::sca_signal<double> ownuse_cost,buy_cost,sell_cost;
 
@@ -95,6 +95,7 @@ int sc_main(int argc, char* argv[]){
 	//Battery
 	p_batt.I(Ibatt);
 	p_batt.V(Vbatt);
+	p_batt.replace(replace_battery);
 	p_batt.SOC(SOC);
 	p_batt.SOH(SOH);
 
@@ -145,8 +146,10 @@ int sc_main(int argc, char* argv[]){
 
 	c_battery.in1(Ibatt);
 	c_battery.in2(Vbatt);
+	c_battery.in3(SOH);
 	c_battery.out1(depr_battery);
 	c_battery.out2(mo_battery);
+	c_battery.out3(replace_battery);
 
 
 	//PV in the cost layer
@@ -188,7 +191,7 @@ int sc_main(int argc, char* argv[]){
 	//To store the values during simualtion
 	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "test.txt" );
 
-	atf->set_mode(sca_decimation(1));
+	atf->set_mode(sca_decimation(60));
 
 	//Selecting signals to track
 
@@ -215,16 +218,17 @@ int sc_main(int argc, char* argv[]){
 	//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
 
 	//	sca_util::sca_trace(atf,wind_speed,"Wind");
-		sca_util::sca_trace(atf,depr_pv,"depr_pv");
-		sca_util::sca_trace(atf,mo_pv,"mo_pv");
+	//	sca_util::sca_trace(atf,depr_pv,"depr_pv");
+	//	sca_util::sca_trace(atf,mo_pv,"mo_pv");
 	//	sca_util::sca_trace(atf,Iwind_inv,"Wind_current");
-		sca_util::sca_trace(atf,depr_wt,"depr_wt");
-		sca_util::sca_trace(atf,mo_wt,"mo_wt");
+	//	sca_util::sca_trace(atf,depr_wt,"depr_wt");
+	//	sca_util::sca_trace(atf,mo_wt,"mo_wt");
 	//	sca_util::sca_trace(atf,Ipv_cnv,"Pv_current");
-		sca_util::sca_trace(atf,Power_wind,"Power_wind");
+	//	sca_util::sca_trace(atf,Power_wind,"Power_wind");
 
 	//	sca_util::sca_trace(atf,sun_irradiance,"Sun_profile");
-		sca_util::sca_trace(atf,Power_pv,"Power_pv");
+	//	sca_util::sca_trace(atf,Power_pv,"Power_pv");
+		sca_util::sca_trace(atf,SOH,"SOH");
 
 
 	//sc_start(LENGTH, sc_core::SC_SEC);

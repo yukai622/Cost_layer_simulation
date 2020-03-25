@@ -4,7 +4,7 @@
 
 #define SIM_STEP 1
 
-#define LENGTH 86400*1
+#define LENGTH 86400*180
 
 #define RATE 60
 
