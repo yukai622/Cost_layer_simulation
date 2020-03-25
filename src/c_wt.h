@@ -18,6 +18,8 @@ SCA_TDF_MODULE(c_wt){
 	
 	private:
 	double mo_price,wt_mo,wt_cap,wt_aging;
-	double current_time;
+	double power,current_time;
+
+
 
 };
