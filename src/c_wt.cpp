@@ -29,15 +29,17 @@ void c_wt::processing(){
 	wt_mo =wt_mo +  mo_price/31536000*power*0.001;	
 
 	//Depreciation cost
-	wt_aging = wt_cap*0.094*(current_time/31536000);
+	wt_aging = WT_NUM * wt_cap*0.094*(current_time/31536000);
 
-/*
-	if(current_time == (LENGTH-1)){
+
+	int timenow = int(current_time);
+
+	if(timenow == (LENGTH-60)){
 		cout<<"Wind turbine depreciation cost is: "<<wt_aging<<endl;
 		cout<<"Wind turbine M&O cost is: "<<wt_mo<<endl;
 		cout<<"==========================================="<<endl;
 	}	
-*/
+
 
 	out1.write(wt_aging);
 	out2.write(wt_mo);

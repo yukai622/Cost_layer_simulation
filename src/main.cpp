@@ -191,7 +191,7 @@ int sc_main(int argc, char* argv[]){
 	//To store the values during simualtion
 	sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file( "test.txt" );
 
-	atf->set_mode(sca_decimation(60));
+//	atf->set_mode(sca_decimation(60));
 
 	//Selecting signals to track
 
@@ -208,11 +208,11 @@ int sc_main(int argc, char* argv[]){
 	//	sca_util::sca_trace(atf,sell_cost,"SELLCOST");
 	//	sca_util::sca_trace(atf,ownuse_cost,"OWNUSECOST");
 
-	//	sca_util::sca_trace(atf,Ibatt,"Ibatt");
-		sca_util::sca_trace(atf,depr_battery,"depr_battery");
-		sca_util::sca_trace(atf,mo_battery,"mo_battery");
+		sca_util::sca_trace(atf,Ibatt,"Ibatt");
+//		sca_util::sca_trace(atf,depr_battery,"depr_battery");
+//		sca_util::sca_trace(atf,mo_battery,"mo_battery");
 	//	sca_util::sca_trace(atf,SOC,"SOC");
-	//	sca_util::sca_trace(atf,Vbatt,"Vbatt");
+		sca_util::sca_trace(atf,Vbatt,"Vbatt");
 	//	sca_util::sca_trace(atf,Phouse1,"Phouse1");
 	//	sca_util::sca_trace(atf,Phouse2,"Phouse2");
 	//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
