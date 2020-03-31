@@ -4,7 +4,7 @@
 
 #define SIM_STEP 1
 
-#define LENGTH 86400*7
+#define LENGTH 86400*365
 
 #define RATE 60
 
@@ -16,7 +16,7 @@
 #define PVLIFETIME 365*20*86400
 #define PVCOST 675
 
-#define WT_NUM 1  
+#define WT_NUM 1 
 #define WTLIFETIME 365*20*86400
 #define WTCOST 19500
 

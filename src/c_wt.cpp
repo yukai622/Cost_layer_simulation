@@ -26,7 +26,7 @@ void c_wt::processing(){
 	power = power + in.read(i);
 	}
 
-	wt_mo =wt_mo +  mo_price/31536000*power*0.001;	
+	wt_mo =wt_mo +  mo_price/525600*power*0.001;	
 
 	//Depreciation cost
 	wt_aging = WT_NUM * wt_cap*0.094*(current_time/31536000);

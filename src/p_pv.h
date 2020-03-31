@@ -12,7 +12,9 @@ SCA_TDF_MODULE (p_pv)
 
   ifstream top; // To store the irradiance profile
 
-  SCA_CTOR(p_pv): P("P"), sun_irradiance("sun_irradiance"), Ptop(0), Pback(0),counter(0) {}
+  
+  
+  SCA_CTOR(p_pv): P("P"),power_pv(0.0), sun_irradiance("sun_irradiance"), Ptop(0), Pback(0),counter(0) {}
 
 
   int pv_number;
@@ -26,6 +28,6 @@ SCA_TDF_MODULE (p_pv)
 
   private:
   int counter,pv_num;
-  double Ptop, Pback;
+  double Ptop, Pback,power_pv;
 
 };

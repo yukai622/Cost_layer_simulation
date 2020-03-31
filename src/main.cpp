@@ -208,11 +208,11 @@ int sc_main(int argc, char* argv[]){
 	//	sca_util::sca_trace(atf,sell_cost,"SELLCOST");
 	//	sca_util::sca_trace(atf,ownuse_cost,"OWNUSECOST");
 
-		sca_util::sca_trace(atf,Ibatt,"Ibatt");
+//		sca_util::sca_trace(atf,Ibatt,"Ibatt");
 //		sca_util::sca_trace(atf,depr_battery,"depr_battery");
 //		sca_util::sca_trace(atf,mo_battery,"mo_battery");
 	//	sca_util::sca_trace(atf,SOC,"SOC");
-		sca_util::sca_trace(atf,Vbatt,"Vbatt");
+//		sca_util::sca_trace(atf,Vbatt,"Vbatt");
 	//	sca_util::sca_trace(atf,Phouse1,"Phouse1");
 	//	sca_util::sca_trace(atf,Phouse2,"Phouse2");
 	//	sca_util::sca_trace(atf,Phouse5,"Phouse5");
@@ -228,7 +228,7 @@ int sc_main(int argc, char* argv[]){
 
 	//	sca_util::sca_trace(atf,sun_irradiance,"Sun_profile");
 	//	sca_util::sca_trace(atf,Power_pv,"Power_pv");
-		sca_util::sca_trace(atf,SOH,"SOH");
+	//	sca_util::sca_trace(atf,SOH,"SOH");
 
 
 	//sc_start(LENGTH, sc_core::SC_SEC);

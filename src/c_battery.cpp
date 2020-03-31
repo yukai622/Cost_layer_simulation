@@ -39,9 +39,9 @@ void c_battery::processing(){
 	}
 
 	
-	power = power + abs(in1.read())*0.001*abs(in2.read())/86400;
+	power = power + abs(in1.read())*0.001*abs(in2.read());
 	//cout<<power<<endl;
-	batt_mo = batt_mo + battery_mo*power/31536000;
+	batt_mo = batt_mo + battery_mo*power/31536000/1000000;
 
 	out2.write(batt_mo);
 

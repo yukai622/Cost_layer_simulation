@@ -30,7 +30,8 @@ void battery_voc::processing(){
 	}else{
 	soh = 1;
 	}
-	tmpsoc = tmpsoc-((tmpcurrent*SIM_STEP)/(3600*3.4*batt_snum)*(1-soh)); //Modify the capacity, 150Ah is the reference one
+	tmpsoc = tmpsoc-((tmpcurrent*SIM_STEP)/((3600*3.4*batt_snum)*soh)); //Modify the capacity, 150Ah is the reference one
+	//tmpsoc = tmpsoc-((tmpcurrent*SIM_STEP)/(3600*3.4*batt_snum)); //Modify the capacity, 150Ah is the reference one
 
 	double deltacurrent = in2.read();
 	double deltafrequency = in3.read();

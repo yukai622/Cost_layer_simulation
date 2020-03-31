@@ -8,7 +8,7 @@ void p_wt::set_attributes()
 
 void p_wt::initialize()
 {
-	in_wind_speed.open("../one_year_inputs/one_year_wind.txt");
+	in_wind_speed.open("../one_year_inputs/one_year_wind_new.txt");
 
 	if (!in_wind_speed) {
 		cout << "Cannot open file.\n"<< endl;
@@ -32,6 +32,7 @@ void p_wt::processing()
 	//double wtp; 
 
 	//cout<<wind<<"@"<<sc_time_stamp()<<endl; 
+
 
 	//wtp =(11200*sin(0.15628*wind-0.623) + 2015*sin(0.6514*wind+0.2421))*0.788; 
 	wtp =WT_NUM *((12570*exp(-pow((wind-17.1)/7.068,2))+5762*exp(-pow((wind-10.88)/3.319,2)))*0.72+200); // for increase wind speed for 50m height
