@@ -16,7 +16,7 @@
 #define PVLIFETIME 365*20*86400
 #define PVCOST 675
 
-#define WT_NUM 1 
+#define WT_NUM 0 
 #define WTLIFETIME 365*20*86400
 #define WTCOST 19500
 

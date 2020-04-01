@@ -38,6 +38,8 @@ void p_wt::processing()
 	wtp =WT_NUM *((12570*exp(-pow((wind-17.1)/7.068,2))+5762*exp(-pow((wind-10.88)/3.319,2)))*0.72+200); // for increase wind speed for 50m height
 
 
+	//cout << wtp << sc_time_stamp()<<endl;
+	
 	power.write(wtp); 
 
 	windspeed.write(wind);

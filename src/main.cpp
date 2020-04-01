@@ -224,7 +224,7 @@ int sc_main(int argc, char* argv[]){
 	//	sca_util::sca_trace(atf,depr_wt,"depr_wt");
 	//	sca_util::sca_trace(atf,mo_wt,"mo_wt");
 	//	sca_util::sca_trace(atf,Ipv_cnv,"Pv_current");
-	//	sca_util::sca_trace(atf,Power_wind,"Power_wind");
+//		sca_util::sca_trace(atf,Power_wind,"Power_wind");
 
 	//	sca_util::sca_trace(atf,sun_irradiance,"Sun_profile");
 	//	sca_util::sca_trace(atf,Power_pv,"Power_pv");

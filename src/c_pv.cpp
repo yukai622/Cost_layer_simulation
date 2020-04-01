@@ -33,13 +33,16 @@ void c_pv::processing(){
 	//pv_mo = mo_price*0.001*pv_number*in.read()*(current_time/31536000);
 	//
 
-	power = 0;
+//	power = 0;
 	for(int i=0;i<RATE;i++){
-		power = power + in.read(i);
+//		power = power + in.read(i);
 		//	cout<<"The"<< i<<"th read power is " << in.read(i)<<endl;
+		pv_mo = pv_mo + mo_price*in.read(i)*0.001/31532000;
 	}
 
-	pv_mo = pv_mo + mo_price*power*0.001/525600;
+//	pv_mo = pv_mo + mo_price*power*0.001/525600;
+
+//	cout<<"The pv_mo cost at "<<current_time<<" is "<<pv_mo<<" with pv power is "<<power<<endl;
 
 
 	//	cout<<"PV deperiation cost is "<< pv_depr <<" PV m&o cost is "<<pv_mo<<endl;

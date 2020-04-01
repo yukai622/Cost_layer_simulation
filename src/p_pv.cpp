@@ -19,7 +19,8 @@ void p_pv::initialize()
 	//unsigned int i;
 	//ifstream top, back; 
 
-	top.open("../one_year_inputs/one_year_sun.txt"); 
+	top.open("../one_year_inputs/one_year_sun_new.txt");// one_year_sun.txt for the MDPI paper run wi_wt exploration
+       							    // one_year_sun_new.txt for the run wo_wt exploration	
 	if (!top) {
 		cout << "Cannot open irradiance file.\n"<< endl;
 		exit(-1);

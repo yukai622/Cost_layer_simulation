@@ -21,12 +21,12 @@ void c_wt::processing(){
 //
 
 	//M&O cost
-	power = 0;
 	for(int i =0; i<RATE;i++){
-	power = power + in.read(i);
+	wt_mo = wt_mo + mo_price/31536000*in.read(i)*0.001;
+//	cout<<"The simulation time is "<<current_time<<"mo cost is "<<wt_mo<<"at the wind power is "<<in.read(i)<<endl;
 	}
 
-	wt_mo =wt_mo +  mo_price/525600*power*0.001;	
+	//cout<<"The simulation time is "<<current_time<<"mo cost is "<<wt_mo<<"at the wind power is "<<power<<endl;
 
 	//Depreciation cost
 	wt_aging = WT_NUM * wt_cap*0.094*(current_time/31536000);

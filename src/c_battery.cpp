@@ -25,7 +25,6 @@ void c_battery::initialize(){
 void c_battery::processing(){
 
 	current_time = double(sc_time_stamp().to_seconds());
-//	cout<< "Simulation time now is:"<<current_time<<endl;
 
 	if(in3.read()>=0.8){
 	batt_depr = counter * battery_cap + battery_cap*5*(1-in3.read());
@@ -39,15 +38,12 @@ void c_battery::processing(){
 	}
 
 	
-	power = power + abs(in1.read())*0.001*abs(in2.read());
-	//cout<<power<<endl;
-	batt_mo = batt_mo + battery_mo*power/31536000/1000000;
+	batt_mo = batt_mo + abs(in1.read())*0.001*abs(in2.read())/3153600;
+//	cout<<"Time at "<<sc_time_stamp()<<"battery mo is "<<batt_mo<<endl;
+//	batt_mo = batt_mo + battery_mo*power/31536000/1000000;
 
 	out2.write(batt_mo);
 
-	int timenow = int(current_time);
-
-//	cout<<timenow<<endl;
 
 	if(count == (LENGTH-1)){
 		cout<<"Battery pack depreciation cost is: "<<batt_depr<<endl;
@@ -58,14 +54,6 @@ void c_battery::processing(){
 
 
 	count = count + 1;
-	//cout << count << endl;
-	/*
-	cout<<battery_mo*(current_time/31536000)<<endl;
-	cout<<(current_time/31536000)<<endl;
-	cout<<battery_cap*(current_time/lifetime)<<endl;
-	cout<<current_time/lifetime<<endl;
-	cout<<(lifetime)<<endl;
-	*/
 
 }
 
