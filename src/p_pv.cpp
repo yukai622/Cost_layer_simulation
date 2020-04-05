@@ -19,7 +19,7 @@ void p_pv::initialize()
 	//unsigned int i;
 	//ifstream top, back; 
 
-	top.open("../one_year_inputs/one_year_sun_new.txt");// one_year_sun.txt for the MDPI paper run wi_wt exploration
+	top.open("../one_year_inputs/one_year_sun_south.txt");// one_year_sun.txt for the MDPI paper run wi_wt exploration
        							    // one_year_sun_new.txt for the run wo_wt exploration	
 	if (!top) {
 		cout << "Cannot open irradiance file.\n"<< endl;
@@ -50,7 +50,7 @@ void p_pv::processing()
 	Pback = 4.752e-09*pow(Gwest,3) - 7.352e-06*pow(Gwest,2) + 0.02238*Gwest;
 
 
-	power_pv = power_pv + Ptop + Pback;
+//	power_pv = power_pv + Ptop + Pback;
 
 
 	if (Ptop < 0){
@@ -58,6 +58,8 @@ void p_pv::processing()
 	}else{  
 
 		P.write((Ptop + Pback)*7.5 * pv_number );// One Ptop + Pback is 300W * 7.5
+
+		power_pv = power_pv+ (Ptop + Pback)*7.5*pv_number;
 
 	}
 
@@ -70,7 +72,7 @@ void p_pv::processing()
 		cout<<"===================================================================="<<endl;
 //		cout<<"PV array has " <<pv_number <<" panels! "<<"@"<<sc_time_stamp()<<endl;
 		cout<<"PV array has " <<pv_number <<" panels! "<<endl;
-		cout<<"Total power generation "<<power_pv<<endl;
+		cout<<"Total pv power generation "<<power_pv*0.001<<endl;
 //		cout<<"===================================================================="<<endl;
 
 		top.close();

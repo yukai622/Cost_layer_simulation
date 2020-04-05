@@ -26,7 +26,11 @@ void battery_voc::processing(){
 
 	if(in4.read()==0){
 	//soh = soh - 3.66e-05*exp(0.04951*abs(tmpcurrent)/batt_pnum)*exp(0.19804*abs(tmpcurrent)/batt_pnum)/86400;
+	if(tmpcurrent == 0){
 	soh = soh - 3.66e-05*exp(0.04951*abs(tmpcurrent)/batt_pnum)/30000;
+	}else{
+	soh = soh - 0;
+	}
 	}else{
 	soh = 1;
 	}

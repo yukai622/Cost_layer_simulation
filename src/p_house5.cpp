@@ -28,7 +28,7 @@ void p_house5::processing(){
 
 	if(counter%10 == 0 || counter == 0){
 	house5powerfile >> rp;
-	out.write((rp*5)/0.95);// Effciency
+	out.write((rp*5)/0.95);// Effciency times 6 for fixed capital, times 5 for full exploration
 	counter++;
 	}else{
 	out.write((rp*5)/0.95);// Effciency

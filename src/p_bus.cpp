@@ -34,18 +34,23 @@ void p_bus::processing(){
 	if(Ibatt_tmp >= 0){ // Load is larger than generation
 
 		if(int(sc_time_stamp().to_seconds())%86400<=25200){
-			own_use = own_use + total_generation/3600000*0.2;
+			//own_use = own_use + total_generation/3600000*0.2;
+			own_use =  total_generation/3600000*0.2;
 		}else if(int(sc_time_stamp().to_seconds())%86400<=68400){
-			own_use = own_use + total_generation/3600000*0.215;
+			//own_use = own_use + total_generation/3600000*0.215;
+			own_use = total_generation/3600000*0.215;
 		}else{
-			own_use = own_use + total_generation/3600000*0.22;
+			//own_use = own_use + total_generation/3600000*0.22;
+			own_use =  total_generation/3600000*0.22;
 		}
 
 		Sell_to_grid.write(0.0); // Do not forget merge!
+		
 
 		if(batt_soc > 0.1 ){ // Battery has energy, can provilde power to load to compensate generation is not enough
 
-			own_use = own_use + Ibatt_tmp*VBUS/3600000*0.215;
+			//own_use = own_use + Ibatt_tmp*VBUS/3600000*0.215;
+			own_use = Ibatt_tmp*VBUS/3600000*0.215;
 			Ibatt_cnv.write(Ibatt_tmp); // Battery discharge current	
 			Buy_from_grid.write(0.0); // Store the value of buy from grid
 
@@ -56,26 +61,33 @@ void p_bus::processing(){
 
 			if(int(sc_time_stamp().to_seconds())%86400<=25200){	
 				total_buy_f1 = total_buy_f1 + Ibatt_tmp*VBUS;
-				total_buy_f1_cost = total_buy_f1_cost + Ibatt_tmp*VBUS/3600000*0.2;
+				//total_buy_f1_cost = total_buy_f1_cost + Ibatt_tmp*VBUS/3600000*0.2;
+				total_buy_f1_cost =  Ibatt_tmp*VBUS/3600000*0.2;
 			}else if(int(sc_time_stamp().to_seconds())%86400<=68400){
 				total_buy_f2 = total_buy_f2 + Ibatt_tmp*VBUS;
-				total_buy_f2_cost = total_buy_f2_cost + Ibatt_tmp*VBUS/3600000*0.215;
+				//total_buy_f2_cost = total_buy_f2_cost + Ibatt_tmp*VBUS/3600000*0.215;
+				total_buy_f2_cost =  Ibatt_tmp*VBUS/3600000*0.215;
 			}else{
 				total_buy_f3 = total_buy_f3 + Ibatt_tmp*VBUS;
-				total_buy_f3_cost = total_buy_f3_cost + Ibatt_tmp*VBUS/3600000*0.22;
+				//total_buy_f3_cost = total_buy_f3_cost + Ibatt_tmp*VBUS/3600000*0.22;
+				total_buy_f3_cost =  Ibatt_tmp*VBUS/3600000*0.22;
 			}
 
 			total_buy = total_buy + Ibatt_tmp*VBUS;
 		}
 
+
 	}else{ // Load is less than generation
 
 		if(int(sc_time_stamp().to_seconds())%86400<=25200){
-			own_use = own_use + total_load/3600000*0.2;
+			//own_use = own_use + total_load/3600000*0.2;
+			own_use = total_load/3600000*0.2;
 		}else if(int(sc_time_stamp().to_seconds())%86400<=68400){
-			own_use = own_use + total_load/3600000*0.215;
+			//own_use = own_use + total_load/3600000*0.215;
+			own_use =  total_load/3600000*0.215;
 		}else{
-			own_use = own_use + total_load/3600000*0.22;
+			//own_use = own_use + total_load/3600000*0.22;
+			own_use =  total_load/3600000*0.22;
 		}
 
 		Buy_from_grid.write(0.0);
@@ -92,18 +104,22 @@ void p_bus::processing(){
 
 			if(int(sc_time_stamp().to_seconds())%86400<=25200){	
 				total_sell_f1 = total_sell_f1 + Ibatt_tmp*VBUS;
-				total_sell_f1_cost = total_sell_f1_cost + Ibatt_tmp*VBUS/3600000*0.03;
+				//total_sell_f1_cost = total_sell_f1_cost + Ibatt_tmp*VBUS/3600000*0.03;
+				total_sell_f1_cost =  Ibatt_tmp*VBUS/3600000*0.03;
 			}else if(int(sc_time_stamp().to_seconds())%86400<=68400){
 				total_sell_f2 = total_sell_f2 + Ibatt_tmp*VBUS;
-				total_sell_f2_cost = total_sell_f2_cost + Ibatt_tmp*VBUS/3600000*0.03;
+				//total_sell_f2_cost = total_sell_f2_cost + Ibatt_tmp*VBUS/3600000*0.03;
+				total_sell_f2_cost =  Ibatt_tmp*VBUS/3600000*0.03;
 			}else{
 				total_sell_f3 = total_sell_f3 + Ibatt_tmp*VBUS;
-				total_sell_f3_cost = total_sell_f3_cost + Ibatt_tmp*VBUS/3600000*0.03;
+				//total_sell_f3_cost = total_sell_f3_cost + Ibatt_tmp*VBUS/3600000*0.03;
+				total_sell_f3_cost = Ibatt_tmp*VBUS/3600000*0.03;
 			}
 
 			total_sell = total_sell + Ibatt_tmp * VBUS;
 
 		}
+
 	}
 
 	counter++;

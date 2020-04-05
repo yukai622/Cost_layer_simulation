@@ -33,10 +33,10 @@ void p_house2::processing(){
 
 	if(counter%10 == 0 || counter == 0){
 	house2powerfile >> rp;
-	out.write(6*rp/0.95);// Effciency
+	out.write(5*rp/0.95);// Effciency
 	counter++;
 	}else{
-	out.write(6*rp/0.95);// Effciency
+	out.write(5*rp/0.95);// Effciency
 	counter++;
 	}
 
