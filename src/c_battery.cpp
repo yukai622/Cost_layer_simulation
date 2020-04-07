@@ -39,11 +39,9 @@ void c_battery::processing(){
 
 	
 	batt_mo = batt_mo + abs(in1.read())*0.001*abs(in2.read())/3153600;
-//	cout<<"Time at "<<sc_time_stamp()<<"battery mo is "<<batt_mo<<endl;
-//	batt_mo = batt_mo + battery_mo*power/31536000/1000000;
+	//cout<<"Time at "<<sc_time_stamp()<<"battery mo is "<<batt_mo<<endl;
 
 	out2.write(batt_mo);
-
 
 	if(count == (LENGTH-1)){
 		cout<<"Battery pack depreciation cost is: "<<batt_depr<<endl;

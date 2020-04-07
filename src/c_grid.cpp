@@ -6,24 +6,43 @@ void c_grid::set_attributes(){
 }
 
 void c_grid::initialize(){
+
+	dynamicp.open("../one_year_inputs/dynamicprice.txt");
+
+	if(!dynamicp){
+		cout<<"Cannot open dynamic price!"<<endl;
+		exit(-1);
+	}
+
+	for(int j=0; j<168;j++){
+		dynamicp >> price[j];
+	}
+
+	dynamicp.close();
+
 }
+
 
 
 void c_grid::processing(){
 
-	current_time = int(sc_time_stamp().to_seconds())%86400;
+	//current_time = int(sc_time_stamp().to_seconds())%86400;
 
-	if(current_time<= 25200){
-	out.write(0.2);
-	}else if(current_time <= 68400){
-	out.write(0.215);
-	}else if(current_time <= 82800){
-	out.write(0.22);
+	if(counter%3600 == 0 || counter == 1){
+	 	i++;
+		out.write(price[i-1]);
+		
 	}else{
-	out.write(0.2);
+		out.write(price[i-1]);
 	}
 
+	counter++;
 
+	if(counter % 604800 == 0){
+		i = 0;
+	}
+
+//	out.write(0.2);
 }
 
 
